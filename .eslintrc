@@ -1,0 +1,16 @@
+{
+  "extends": "airbnb",
+  "env": {
+    "jest": true,
+    "browser": true,
+    "es6": true
+  },
+  "parser": "babel-eslint",
+  "rules":{
+    "linebreak-style": 0, // to disable line breaks issue between PC/MAC enviroments.
+    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }], // to support js and jsx extensions for REACT
+    "react/prop-types": 0, // we dont want to check proptypes , as object is forbidden and we would require to pass objects.
+    "max-len": ["error", 150],
+    "react/no-danger": 0 // disable warning for usage of dangerouslySetInnerHTML
+  }
+}
