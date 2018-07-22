@@ -1,0 +1,10 @@
+@import "bootstrap-overrides.scss";
+@import "app-bootstrap.scss";
+@import "mixins.scss";
+@import "app-components.scss";
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+}
