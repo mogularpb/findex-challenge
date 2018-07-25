@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import apiGet from '../../api/api';
+import Select from 'react-select';
 import Events from '../events';
 import FormGroup from './form-group';
 import { getEvents, getGenres } from '../../api/api';
@@ -77,7 +77,8 @@ class TicketMasterForm extends Component {
   };
 
   render() {
-    const { displayedEvents = [], validFields } = this.state;
+    const { displayedEvents = [], validFields, genres = [] } = this.state;
+    const genreInput = props => <Select {...props} options={genres} />;
     return (
       <div className="text-center">
         <form className="form-signin" onSubmit={this.handleSubmit}>
@@ -92,8 +93,15 @@ class TicketMasterForm extends Component {
             validationText="Please enter a 4 digit postcode"
           />
           <FormGroup
+            field="genreId"
+            placeholder="Genre"
+            validator={validFields}
+            onChangeFunction={this.handleOnChange}
+            CustomInput={genreInput}
+          />
+          <FormGroup
             field="keyword"
-            placeholder="Genre or type"
+            placeholder="Include a keyword"
             validator={validFields}
             onChangeFunction={this.handleOnChange}
           />

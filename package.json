@@ -9,7 +9,8 @@
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
     "react-scripts": "1.1.4",
-    "react-strap": "0.0.1"
+    "react-strap": "0.0.1",
+    "react-select": "^2.0.0"
   },
   "scripts": {
     "build:css": "node-sass-chokidar --include-path node_modules/bootstrap/scss/ src/ -o src/",
