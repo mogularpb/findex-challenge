@@ -3,28 +3,43 @@ import React, { Component } from 'react';
 class FormGroup extends Component {
   passChangeUpToParent = (evt) => {
     const { onChangeFunction, field } = this.props;
-    onChangeFunction(field, evt.target.value);
+    const { value } = evt.target || evt;
+    onChangeFunction({
+      field,
+      value,
+    });
   };
 
 
   render() {
     const {
-      field, placeholder, validator, validationText,
+      field, placeholder, validator, validationText, CustomInput,
     } = this.props;
     return (
       <div className="form-group">
         <label htmlFor={field} className="sr-only" id={field}>
           Postcode
         </label>
-        <input
-          name={field}
-          type="text"
-          id={field}
-          className="form-control"
-          placeholder={placeholder}
-          required=""
-          onBlur={this.passChangeUpToParent}
-        />
+        {!CustomInput
+          ? (
+            <input
+              name={field}
+              type="text"
+              id={field}
+              className="form-control"
+              placeholder={placeholder}
+              required=""
+              onBlur={this.passChangeUpToParent}
+            />
+          )
+          : (
+            <CustomInput
+              name={field}
+              id={field}
+              onChange={this.passChangeUpToParent}
+            />
+          )
+        }
         {Object.prototype.hasOwnProperty.call(validator, field) && !validator[field] && (
           <small className="form-text text-danger text-left">
             {validationText}
