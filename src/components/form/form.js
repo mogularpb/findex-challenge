@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import apiGet from '../../api/api';
 import Events from '../events';
 import FormGroup from './form-group';
+import { getEvents, getGenres } from '../../api/api';
 
 class TicketMasterForm extends Component {
   constructor(props) {
@@ -10,11 +11,24 @@ class TicketMasterForm extends Component {
       displayedEvents: [],
       fields: {},
       validFields: {},
+      genres: [],
     };
   }
 
+  componentDidMount() {
+    getGenres().then((res) => {
+      const { data: { _embedded: { classifications } } } = res;
+      this.setState({
+        genres: classifications.filter(item => item.type).map(({ type: { name, id } }) => ({
+          label: name,
+          value: id,
+        })),
+      });
+    });
+  }
+
   getEvents(fields) {
-    apiGet(fields).then((res) => {
+    getEvents(fields).then((res) => {
       const { data: { _embedded: events } } = res;
       this.setState({
         displayedEvents: events.events,
