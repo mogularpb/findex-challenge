@@ -36,26 +36,27 @@ class TicketMasterForm extends Component {
     });
   }
 
-  validator = (field, val) => {
+  validator = (field, value) => {
     switch (field) {
       case 'postalCode':
-        return !Number.isNaN(Number.parseInt(val, 10)) && val.length === 4;
+        return !Number.isNaN(Number.parseInt(value, 10)) && value.length === 4;
       default:
         return true;
     }
   };
 
-  validateField = (field, value) => {
+  validateField = ({ field, value }) => {
+    const { fields, validFields } = this.state;
     if (this.validator(field, value)) {
       this.setState({
-        validFields: { [field]: true },
-        fields: { [field]: value },
+        validFields: { ...validFields, [field]: true },
+        fields: { ...fields, [field]: value },
       });
       return true;
     }
     this.setState({
-      validFields: { [field]: false },
-      fields: { [field]: null },
+      validFields: { ...validFields, [field]: false },
+      fields: { ...fields, [field]: null },
     });
     return false;
   };
