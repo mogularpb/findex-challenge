@@ -72,8 +72,8 @@ class TicketMasterForm extends Component {
     }
   };
 
-  handleOnChange = (field, value) => {
-    this.validateField(field, value);
+  handleOnChange = (inputParams) => {
+    this.validateField(inputParams);
   };
 
   render() {
