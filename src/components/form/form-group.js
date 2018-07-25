@@ -13,7 +13,7 @@ class FormGroup extends Component {
 
   render() {
     const {
-      field, placeholder, validator, validationText, CustomInput,
+      field, placeholder, validator, validationText, CustomInput, options, currentFieldValues,
     } = this.props;
     return (
       <div className="form-group">
@@ -34,9 +34,11 @@ class FormGroup extends Component {
           )
           : (
             <CustomInput
+              {...this.props}
               name={field}
               id={field}
               onChange={this.passChangeUpToParent}
+              value={currentFieldValues[field] && options.find(option => option.value === currentFieldValues[field])}
             />
           )
         }

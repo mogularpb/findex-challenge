@@ -77,8 +77,14 @@ class TicketMasterForm extends Component {
   };
 
   render() {
-    const { displayedEvents = [], validFields, genres = [] } = this.state;
-    const genreInput = props => <Select {...props} options={genres} />;
+    const {
+      displayedEvents = [], validFields, genres = [], fields = {},
+    } = this.state;
+    const genreInput = props => (
+      <Select
+        {...props}
+      />
+    );
     return (
       <div className="text-center">
         <form className="form-signin" onSubmit={this.handleSubmit}>
@@ -98,6 +104,8 @@ class TicketMasterForm extends Component {
             validator={validFields}
             onChangeFunction={this.handleOnChange}
             CustomInput={genreInput}
+            options={genres}
+            currentFieldValues={fields}
           />
           <FormGroup
             field="keyword"
