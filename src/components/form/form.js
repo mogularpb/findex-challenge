@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import Select from 'react-select';
 import Events from '../events';
 import FormGroup from './form-group';
 import { getEvents, getGenres } from '../../api/api';
+import inputText from './input-text';
+import inputSelect from './input-select';
 
 class TicketMasterForm extends Component {
   constructor(props) {
@@ -61,7 +62,6 @@ class TicketMasterForm extends Component {
     return false;
   };
 
-
   handleSubmit = (event) => {
     event.preventDefault();
     const { validFields, fields } = this.state;
@@ -80,11 +80,6 @@ class TicketMasterForm extends Component {
     const {
       displayedEvents = [], validFields, genres = [], fields = {},
     } = this.state;
-    const genreInput = props => (
-      <Select
-        {...props}
-      />
-    );
     return (
       <div className="text-center">
         <form className="form-signin" onSubmit={this.handleSubmit}>
@@ -94,24 +89,27 @@ class TicketMasterForm extends Component {
           <FormGroup
             field="postalCode"
             placeholder="Postcode"
-            validator={validFields}
             onChangeFunction={this.handleOnChange}
+            validator={validFields}
             validationText="Please enter a 4 digit postcode"
+            InjectedInput={inputText}
+            useOnBlur
           />
           <FormGroup
             field="genreId"
             placeholder="Genre"
-            validator={validFields}
             onChangeFunction={this.handleOnChange}
-            CustomInput={genreInput}
-            options={genres}
-            currentFieldValues={fields}
+            selectOptions={genres}
+            allPopulatedFields={fields}
+            InjectedInput={inputSelect}
+            useOnChange
           />
           <FormGroup
             field="keyword"
             placeholder="Include a keyword"
-            validator={validFields}
             onChangeFunction={this.handleOnChange}
+            InjectedInput={inputText}
+            useOnBlur
           />
           <button className="btn btn-lg btn-primary btn-block" type="submit">
             Find event
