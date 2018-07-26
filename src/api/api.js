@@ -8,10 +8,10 @@ const buildParamQueryString = params => (
   params
     ? Object.entries(params)
       .map(([key, value]) => `&${key}=${value}`)
-      .join()
+      .join('')
     : ''
 );
-const buildApiCall = resource => params => axios.get(`${baseUrl}/${resource}.json${apiKeyQueryParam}${buildParamQueryString(params)}`);
+const buildApiCall = resourceName => params => axios.get(`${baseUrl}/${resourceName}.json${apiKeyQueryParam}${buildParamQueryString(params)}`);
 
 export const getEvents = params => buildApiCall('events')(params);
 export const getGenres = () => buildApiCall('classifications')();
