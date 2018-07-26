@@ -30,10 +30,12 @@ class TicketMasterForm extends Component {
 
   getEvents(fields) {
     getEvents(fields).then((res) => {
-      const { data: { _embedded: events } } = res;
-      this.setState({
-        displayedEvents: events.events,
-      });
+      const { data: { _embedded: { events: [events] } } } = res;
+      if (events) {
+        this.setState({
+          displayedEvents: events,
+        });
+      }
     });
   }
 
